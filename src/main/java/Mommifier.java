@@ -5,21 +5,22 @@ import java.util.List;
 
 public class Mommifier {
 
-    public String insertMommy(String str) {
+    public String convert(String str) {
         int length = str.length();
         String result = "";
         String vowel = "[aeiou]";
-        List<String> list = Arrays.asList(str.split(""));
-        List<String> newList = new ArrayList<>(list);
-        long vowelLength = newList.stream().filter(s -> s.matches(vowel)).count();
+        String insertString = "mommy";
+        List<String> splitList = Arrays.asList(str.split(""));
+        List<String> newSplitList = new ArrayList<>(splitList);
+        long vowelLength = newSplitList.stream().filter(s -> s.matches(vowel)).count();
         if (vowelLength > length*0.3) {
-            for (int i =0; i < newList.size()-1; i++) {
-                if (newList.get(i).matches(vowel) && newList.get(i+1).matches(vowel)) {
-                    newList.add(i+1,"mommy");
+            for (int i =0; i < newSplitList.size()-1; i++) {
+                if (newSplitList.get(i).matches(vowel) && newSplitList.get(i+1).matches(vowel)) {
+                    newSplitList.add(i+1,insertString);
                 }
             }
         }
-        for (String str1 : newList) {
+        for (String str1 : newSplitList) {
             result += str1;
         }
         return result;
